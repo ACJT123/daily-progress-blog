@@ -1,13 +1,35 @@
 <template>
-  <header>
-    <nav>
-      <ul>
-        <li><NuxtLink to="/">ACJT Daily Progress Blog</NuxtLink></li>
-        <li><NuxtLink to="/posts/1">Post 1</NuxtLink></li>
-        <li><NuxtLink to="/posts/2">Post 2</NuxtLink></li>
+  <header class="relative">
+    <nav class="fixed top-0 w-full z-50">
+      <ul
+        class="flex gap-4 py-8 px-[200px] items-baseline shadow-md shadow-green-400/25 bg-black"
+      >
+        <li class="flex-grow">
+          <NuxtLink to="/">ACJT Daily Progress Blog</NuxtLink>
+        </li>
+        <li class="flex-grow-0">
+          <NuxtLink to="/blogs">Blogs</NuxtLink>
+        </li>
+        <li class="flex-grow-0">
+          <NuxtLink to="/categories">Categories</NuxtLink>
+        </li>
+        <li class="flex-grow-0">
+          <NuxtLink to="/about">About</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="sass">
+
+li:first-child
+  @apply hover:text-green-400 transition-all
+  a
+    @apply text-2xl font-bold
+
+li:not(:first-child)
+  @apply hover:text-green-400 transition-all
+  a
+    @apply text-lg font-semibold
+</style>
