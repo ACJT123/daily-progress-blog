@@ -4,6 +4,8 @@
   <Layout>
     <NuxtPage />
   </Layout>
+
+  <Footer />
 </template>
 
 <style>
@@ -21,4 +23,5 @@
 <script lang="ts" setup>
 import Header from "~/components/header.vue";
 import Layout from "~/components/layout.vue";
+import Footer from "~/components/footer.vue";
 </script>
