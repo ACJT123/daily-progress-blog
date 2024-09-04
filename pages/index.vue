@@ -1,15 +1,27 @@
-  <script lang="ts" setup>
-  import { ref } from "vue";
-  import Header from "./components/header.vue";
-  import Layout from "./components/layout.vue";
-  </script>
+<script lang="ts" setup>
 
-  <style scoped></style>
+</script>
 
-  <template>
-    <Header />
+<style scoped></style>
 
-    <Layout>
-      <div class="h-[2000px]">124124124</div>
-    </Layout>
-  </template>
+<template>
+  <div class="flex items-center justify-between pt-4">
+    <div>
+      <h1 class="font-bold text-3xl">Welcome To My Daily Progress Blog Site</h1>
+
+      <p class="max-w-[600px] mt-4">
+        This is a blog site where I will be documenting my daily progress. I
+        will be posting daily updates on what I have learned and what I have
+        done. I will also be posting about any challenges I have faced and how I
+        have overcome them.
+        <strong>
+          <br />
+          (Sometimes I will not be able to post daily updates)
+        </strong>
+      </p>
+    </div>
+    <div class="size-48 h-fit">
+      <img src="/assets/images/hello.png" alt="" />
+    </div>
+  </div>
+</template>
