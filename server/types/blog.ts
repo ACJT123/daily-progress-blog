@@ -1,4 +1,5 @@
 export interface Blog {
+  id: string;
   created_time: string;
   properties: {
     Name: {

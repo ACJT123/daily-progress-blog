@@ -8,14 +8,15 @@ const loading = ref(true);
 
 const fetchBlogs = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/blog");
-    const blogData = await res.json();
+    const { data } = await useFetch("/api/blog");
 
-    blogs.value = blogData.filter((_: any, index: number) => index < 4);
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-  } finally {
+    blogs.value = Array.isArray(data.value)
+      ? (data.value as Blog[]).filter((_: any, index: number) => index < 4)
+      : [];
+
     loading.value = false;
+  } catch (error) {
+    console.error(error);
   }
 };
 
