@@ -2,10 +2,13 @@
   <header class="relative">
     <nav class="fixed top-0 w-full z-50">
       <ul
-        class="flex gap-4 py-8 px-[200px] items-baseline shadow-md shadow-green-400/25 bg-black"
+        class="flex gap-4 py-8 px-[20px] md:px-[50px] lg:px-[80px] xl:px-[200px] items-baseline shadow-md shadow-green-400/25 bg-black"
       >
-        <li class="flex-grow">
+        <li class="flex-grow hidden md:block">
           <NuxtLink to="/">ACJT Daily Progress Blog</NuxtLink>
+        </li>
+        <li class="flex-grow block md:hidden">
+          <NuxtLink to="/">Home</NuxtLink>
         </li>
         <li class="flex-grow-0">
           <NuxtLink to="/blogs">Blogs</NuxtLink>
