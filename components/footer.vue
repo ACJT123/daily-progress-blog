@@ -1,6 +1,6 @@
 <template>
-  <footer class="px-[200px] border-t-2 py-4 border-green-400/25">
-    <div class="grid grid-cols-4">
+  <footer class="px-[20px] md:px-[50px] lg:px-[80px] xl:px-[200px] border-t-2 py-4 border-green-400/25">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="col-span-2">
         <h1 class="mb-4 font-bold">About This Site</h1>
 
