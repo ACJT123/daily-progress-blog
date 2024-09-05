@@ -1,11 +1,9 @@
-import { Client } from "@notionhq/client";
+import { NOTION } from "~/lib/notion";
 
-// Create a Notion instance
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const database_id = process.env.NOTION_DATABASE_ID;
 
 async function getBlogPosts() {
-  const data = await notion.databases.query({
+  const data = await NOTION.databases.query({
     database_id: database_id!,
   });
 
@@ -13,7 +11,7 @@ async function getBlogPosts() {
 }
 
 async function getBlogContent(id: string) {
-  const response = await notion.blocks.children.list({
+  const response = await NOTION.blocks.children.list({
     block_id: id,
   });
 
