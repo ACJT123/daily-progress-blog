@@ -24,7 +24,9 @@ fetchBlogs();
 </script>
 
 <template>
-  <div class="flex items-center justify-between pt-4">
+  <div
+    class="flex flex-col-reverse md:flex-row items-center justify-between pt-4"
+  >
     <div>
       <h1 class="font-bold text-3xl">Welcome To My Daily Progress Blog Site</h1>
 
@@ -54,7 +56,10 @@ fetchBlogs();
     </div>
 
     <!-- Blog Content -->
-    <div v-else class="grid grid-cols-4 gap-4 mt-4">
+    <div
+      v-else
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4"
+    >
       <NuxtLink
         to="/blogs"
         v-for="blog in blogs"
