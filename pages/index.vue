@@ -40,7 +40,7 @@ fetchBlogs();
       </p>
     </div>
     <div class="size-48 h-fit">
-      <img src="/assets/images/hello.png" alt="" />
+      <img src="/assets/images/hello.png" alt="hello" />
     </div>
   </div>
 
