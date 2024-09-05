@@ -12,8 +12,6 @@ res.json().then((blog) => {
 
   console.log(blog);
 });
-
-
 </script>
 
 <template>
