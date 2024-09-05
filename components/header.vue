@@ -24,7 +24,7 @@
   </header>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 
 li:first-child
   @apply hover:text-green-400 transition-all
