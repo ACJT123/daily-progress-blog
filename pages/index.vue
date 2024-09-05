@@ -8,7 +8,7 @@ const loading = ref(true);
 
 const fetchBlogs = async () => {
   try {
-    const { data } = await useFetch("/api/blog");
+    const { data } = await useFetch("/api/blogs");
 
     blogs.value = Array.isArray(data.value)
       ? (data.value as Blog[]).filter((_: any, index: number) => index < 4)
