@@ -61,7 +61,7 @@ fetchBlogs();
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mt-4"
     >
       <NuxtLink
-        to="/blogs"
+        :to="`/blog/${blog.id}`"
         v-for="blog in blogs"
         class="transition-transform h-[400px] cursor-pointer hover:scale-105 border-green-400/25 border-2 rounded-xl overflow-hidden"
       >
