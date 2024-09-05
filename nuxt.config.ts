@@ -15,7 +15,7 @@ export default defineNuxtConfig({
   nitro: {
     esbuild: {
       options: {
-        target: "esnext", // supports top level await
+        // target: "esnext", // supports top level await
       },
     },
   },
