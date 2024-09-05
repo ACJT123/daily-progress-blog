@@ -10,14 +10,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/content", "@nuxt/image"],
-
-  app:{
-    pageTransition: {
-      name: "page",
-      mode: "out-in",
-    },
-  },
+  modules: ["@nuxt/image"],
 
   nitro: {
     esbuild: {

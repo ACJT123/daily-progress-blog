@@ -3,15 +3,23 @@ import { ref } from "vue";
 import type { Blog } from "~/server/types/blog";
 import { DateTime } from "luxon";
 
-const res = await fetch("http://localhost:3000/api/blog");
-
 const blogs = ref<Blog[]>([]);
+const loading = ref(true);
 
-res.json().then((blog) => {
-  blogs.value = blog.filter((_: any, index: number) => index < 4);
+const fetchBlogs = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/blog");
+    const blogData = await res.json();
 
-  console.log(blog);
-});
+    blogs.value = blogData.filter((_: any, index: number) => index < 4);
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+  } finally {
+    loading.value = false;
+  }
+};
+
+fetchBlogs();
 </script>
 
 <template>
@@ -38,7 +46,14 @@ res.json().then((blog) => {
   <div class="mt-8">
     <h1 class="text-2xl font-bold">Recent Blogs</h1>
 
-    <div class="grid grid-cols-4 gap-4 mt-4">
+    <!-- Loading Spinner -->
+    <div v-if="loading" class="flex justify-center items-center">
+      <div class="loader"></div>
+      <p>Loading...</p>
+    </div>
+
+    <!-- Blog Content -->
+    <div v-else class="grid grid-cols-4 gap-4 mt-4">
       <NuxtLink
         to="/blogs"
         v-for="blog in blogs"
@@ -81,6 +96,7 @@ res.json().then((blog) => {
 
             <div
               v-for="tag in blog.properties.Tags.multi_select"
+              :key="tag.id"
               class="bg-green-400/50 text-white text-[12px] px-2 rounded-md"
             >
               {{ tag.name }}
