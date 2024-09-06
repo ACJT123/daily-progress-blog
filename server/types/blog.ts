@@ -103,3 +103,8 @@ export interface SingleBlog {
     };
   };
 }
+
+export interface SingleBlogResponse {
+  block?: any[];
+  headers?: any;
+}

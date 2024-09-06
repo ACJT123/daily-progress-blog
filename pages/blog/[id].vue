@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRoute } from "nuxt/app";
-import { BlockType, type SingleBlog } from "~/server/types/blog";
+import {
+  BlockType,
+  type SingleBlog,
+  type SingleBlogResponse,
+} from "~/server/types/blog";
 
 const blog = ref<SingleBlog>({});
 const loading = ref(true);
@@ -10,8 +14,9 @@ const route = useRoute();
 
 const fetchBlog = async () => {
   try {
-    const { data }: { data: { value: { block?: any[]; headers?: any } } } =
-      await useFetch(`/api/blog/${route.params.id}`);
+    const { data }: { data: { value: SingleBlogResponse } } = await useFetch(
+      `/api/blog/${route.params.id}`
+    );
 
     blog.value.block = Array.isArray(data.value.block) ? data.value.block : [];
     blog.value.headers = data.value.headers;
