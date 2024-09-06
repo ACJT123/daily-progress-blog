@@ -45,85 +45,31 @@ export interface Blog {
   };
 }
 
+interface RichTextBlock {
+  rich_text: {
+    text: {
+      content: string;
+    };
+    annotations: {
+      bold: boolean;
+      italic: boolean;
+      strikethrough: boolean;
+      underline: boolean;
+      code: boolean;
+      color: string;
+    };
+  }[];
+}
+
 export interface SingleBlog {
   block?: {
     type: string;
-    heading_1?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    heading_2?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    heading_3?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    paragraph?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    number: number;
-    numbered_list_item?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
+    heading_1?: RichTextBlock;
+    heading_2?: RichTextBlock;
+    heading_3?: RichTextBlock;
+    paragraph?: RichTextBlock;
+    numbered_list_item?: RichTextBlock;
+    number?: number;
   }[];
   headers?: {
     Name: {
