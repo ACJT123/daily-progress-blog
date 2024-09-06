@@ -105,7 +105,7 @@ fetchBlog();
         </div>
       </section>
 
-      <p v-for="block in blog.block">
+      <section v-for="block in blog.block">
         <br />
 
         <template
@@ -155,7 +155,7 @@ fetchBlog();
             :code="block.code?.rich_text[0]?.text?.content"
           />
         </template>
-      </p>
+      </section>
     </div>
   </div>
 </template>
