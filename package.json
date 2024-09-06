@@ -17,6 +17,7 @@
     "luxon": "^3.5.0",
     "nuxt": "^3.13.0",
     "sass": "^1.78.0",
+    "simple-code-editor": "^2.0.9",
     "vue": "latest",
     "vue-notion": "^3.0.0-beta.1"
   },

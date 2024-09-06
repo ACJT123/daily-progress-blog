@@ -1,3 +1,13 @@
+export enum BlockType {
+  PARAGRAPH = "paragraph",
+  HEADING_1 = "heading_1",
+  HEADING_2 = "heading_2",
+  HEADING_3 = "heading_3",
+  NUMBERED_LIST_ITEM = "numbered_list_item",
+  IMAGE = "image",
+  CODE = "code",
+}
+
 export interface Blog {
   id: string;
   created_time: string;
@@ -45,85 +55,38 @@ export interface Blog {
   };
 }
 
+interface RichTextBlock {
+  rich_text: {
+    text?: {
+      content: string;
+    };
+    annotations: {
+      bold: boolean;
+      italic: boolean;
+      strikethrough: boolean;
+      underline: boolean;
+      code: boolean;
+      color: string;
+    };
+  }[];
+  language?: string;
+}
+
 export interface SingleBlog {
   block?: {
-    type: string;
-    heading_1?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
+    type: BlockType;
+    heading_1?: RichTextBlock;
+    heading_2?: RichTextBlock;
+    heading_3?: RichTextBlock;
+    paragraph?: RichTextBlock;
+    numbered_list_item?: RichTextBlock;
+    image?: {
+      file: {
+        url: string;
+      };
     };
-    heading_2?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    heading_3?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    paragraph?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
-    number: number;
-    numbered_list_item?: {
-      rich_text: {
-        text: {
-          content: string;
-        };
-        annotations: {
-          bold: boolean;
-          italic: boolean;
-          strikethrough: boolean;
-          underline: boolean;
-          code: boolean;
-          color: string;
-        };
-      }[];
-    };
+    code?: RichTextBlock;
+    number?: number;
   }[];
   headers?: {
     Name: {
@@ -148,4 +111,9 @@ export interface SingleBlog {
       }[];
     };
   };
+}
+
+export interface SingleBlogResponse {
+  block?: any[];
+  headers?: any;
 }
