@@ -1,3 +1,11 @@
+export enum BlockType {
+  PARAGRAPH = "paragraph",
+  HEADING_1 = "heading_1",
+  HEADING_2 = "heading_2",
+  HEADING_3 = "heading_3",
+  NUMBERED_LIST_ITEM = "numbered_list_item",
+}
+
 export interface Blog {
   id: string;
   created_time: string;
@@ -63,7 +71,7 @@ interface RichTextBlock {
 
 export interface SingleBlog {
   block?: {
-    type: string;
+    type: BlockType;
     heading_1?: RichTextBlock;
     heading_2?: RichTextBlock;
     heading_3?: RichTextBlock;

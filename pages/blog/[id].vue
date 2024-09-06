@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { useRoute } from "nuxt/app";
-import type { SingleBlog } from "~/server/types/blog";
+import { BlockType, type SingleBlog } from "~/server/types/blog";
 
 const blog = ref<SingleBlog>({});
 const loading = ref(true);
@@ -35,9 +35,9 @@ fetchBlog();
       <p v-for="block in blog.block" class="text-[12px]">
         <template
           v-if="
-            block.type === 'heading_1' ||
-            block.type === 'heading_2' ||
-            block.type === 'heading_3'
+            block.type === BlockType.HEADING_1 ||
+            block.type === BlockType.HEADING_2 ||
+            block.type === BlockType.HEADING_3
           "
         >
           <a
@@ -66,9 +66,9 @@ fetchBlog();
 
         <template
           v-if="
-            block.type === 'heading_1' ||
-            block.type === 'heading_2' ||
-            block.type === 'heading_3'
+            block.type === BlockType.HEADING_1 ||
+            block.type === BlockType.HEADING_2 ||
+            block.type === BlockType.HEADING_3
           "
         >
           <h1
@@ -79,13 +79,13 @@ fetchBlog();
           </h1>
         </template>
 
-        <template v-else-if="block.type === 'paragraph'">
+        <template v-else-if="block.type === BlockType.PARAGRAPH">
           <p class="mt-2">
             {{ block.paragraph?.rich_text[0].text.content }}
           </p>
         </template>
 
-        <template v-else-if="block.type === 'numbered_list_item'">
+        <template v-else-if="block.type === BlockType.NUMBERED_LIST_ITEM">
           <div class="flex items-baseline gap-2">
             <span> {{ block.number }}. </span>
 
