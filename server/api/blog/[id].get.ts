@@ -1,5 +1,5 @@
 import { NOTION } from "~/lib/notion";
-import { SingleBlog } from "~/server/types/blog";
+import { BlockType, SingleBlog } from "~/server/types/blog";
 
 async function getBlogContentBlock(id: string) {
   const response = await NOTION.blocks.children.list({
@@ -26,9 +26,9 @@ export default defineEventHandler(async (event: any) => {
 
     // add number label for numbered list
     blog.results
-      .filter((block: any) => block.type === "numbered_list_item")
+      .filter((block: any) => block.type === BlockType.NUMBERED_LIST_ITEM)
       .forEach((block: any, index: number) => {
-        if (block.type === "numbered_list_item") {
+        if (block.type === BlockType.NUMBERED_LIST_ITEM) {
           block.number = index + 1;
         }
       });
