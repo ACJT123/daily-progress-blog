@@ -34,9 +34,9 @@ fetchBlog();
 </script>
 
 <template>
-  <div class="flex gap-10 pb-4 pt-6 relative">
+  <div class="flex flex-col md:flex-row gap-10 pb-4 pt-6 relative">
     <aside
-      class="bg-green-400/20 rounded-md px-4 py-2 pb-4 w-[200px] h-fit sticky top-4"
+      class="bg-green-400/20 rounded-md px-4 py-2 pb-4 w-[200px] h-fit sticky top-4 hidden md:block"
     >
       <h1 class="border-b-2 border-white/10 p-2 pt-0 pl-0">Table Of Content</h1>
 
