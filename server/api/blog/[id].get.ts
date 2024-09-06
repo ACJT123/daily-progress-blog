@@ -23,11 +23,11 @@ export default defineEventHandler(async (event: any) => {
     const headers = (await getBlogHeaders(id)) as any;
 
     // add number label for numbered list
-    blog.results.forEach((block: any, index: number) => {
-      if (block.type === BlockType.NUMBERED_LIST_ITEM) {
+    blog.results
+      .filter((block: any) => block.type === BlockType.NUMBERED_LIST_ITEM)
+      .forEach((block: any, index: number) => {
         block.number = index + 1;
-      }
-    });
+      });
 
     return {
       block: blog.results,
