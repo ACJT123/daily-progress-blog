@@ -111,9 +111,11 @@ export interface SingleBlog {
       }[];
     };
   };
+  createdDate: string;
 }
 
 export interface SingleBlogResponse {
   block?: any[];
   headers?: any;
+  createdDate: string;
 }

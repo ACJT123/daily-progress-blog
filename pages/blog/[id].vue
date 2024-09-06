@@ -7,8 +7,11 @@ import {
   type SingleBlogResponse,
 } from "~/server/types/blog";
 import Code from "~/components/code.vue";
+import { DateTime } from "luxon";
 
-const blog = ref<SingleBlog>({});
+const blog = ref<SingleBlog>({
+  createdDate: DateTime.now().toISO(),
+});
 const loading = ref(true);
 
 const route = useRoute();
@@ -21,6 +24,7 @@ const fetchBlog = async () => {
 
     blog.value.block = Array.isArray(data.value.block) ? data.value.block : [];
     blog.value.headers = data.value.headers;
+    blog.value.createdDate = data.value.createdDate;
   } catch (error) {
     console.error(error);
   }
@@ -64,6 +68,42 @@ fetchBlog();
         :alt="blog.headers?.Name.title[0].text?.content"
         class="h-[300px] object-cover mx-auto mt-4 rounded-lg"
       />
+
+      <!-- tags and created date -->
+      <section class="flex gap-2 items-center justify-center mt-8 gap-8">
+        <div class="flex gap-2 items-center">
+          <div class="size-4">
+            <img
+              src="https://img.icons8.com/ios/50/FFFFFF/calendar.png"
+              alt="calendar"
+            />
+          </div>
+
+          <div class="text-[14px]">
+            {{ DateTime.fromISO(blog.createdDate).toFormat("dd LLL yyyy") }}
+          </div>
+        </div>
+
+        <div
+          class="flex gap-2 items-center"
+          v-if="blog.headers?.Tags.multi_select?.length! > 0"
+        >
+          <div class="size-4">
+            <img
+              src="https://img.icons8.com/forma-light/24/FFFFFF/tags.png"
+              alt="tags"
+            />
+          </div>
+
+          <div
+            v-for="tag in blog?.headers?.Tags.multi_select"
+            :key="tag.id"
+            class="bg-green-400/50 text-white text-[12px] px-2 rounded-md"
+          >
+            {{ tag.name }}
+          </div>
+        </div>
+      </section>
 
       <p v-for="block in blog.block">
         <br />

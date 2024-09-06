@@ -31,7 +31,11 @@ export default defineEventHandler(async (event: any) => {
         }
       });
 
-    return { block: blog.results, headers: headers.properties };
+    return {
+      block: blog.results,
+      headers: headers.properties,
+      createdDate: headers.created_time,
+    };
   } catch (error) {
     console.error("Error fetching blog content", error);
     return { blog: null };
