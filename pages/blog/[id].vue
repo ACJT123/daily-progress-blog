@@ -6,6 +6,7 @@ import {
   type SingleBlog,
   type SingleBlogResponse,
 } from "~/server/types/blog";
+import Code from "~/components/code.vue";
 
 const blog = ref<SingleBlog>({});
 const loading = ref(true);
@@ -20,8 +21,6 @@ const fetchBlog = async () => {
 
     blog.value.block = Array.isArray(data.value.block) ? data.value.block : [];
     blog.value.headers = data.value.headers;
-
-    console.log("blog", blog.value);
   } catch (error) {
     console.error(error);
   }
@@ -46,10 +45,10 @@ fetchBlog();
           "
         >
           <a
-            :href="'#' + block[block.type]?.rich_text[0].text.content"
+            :href="'#' + block[block.type]?.rich_text[0]?.text?.content"
             class="block mt-2 opacity-70 hover:opacity-100 hover:underline"
           >
-            {{ block[block.type]?.rich_text[0].text.content }}
+            {{ block[block.type]?.rich_text[0]?.text?.content }}
           </a>
         </template>
       </p>
@@ -57,12 +56,12 @@ fetchBlog();
 
     <div class="flex-1">
       <h1 class="font-bold text-2xl text-center">
-        {{ blog.headers?.Name.title[0].text.content }}
+        {{ blog.headers?.Name.title[0].text?.content }}
       </h1>
 
       <NuxtImg
         :src="blog.headers && blog.headers['Files & media'].files[0].file.url"
-        :alt="blog.headers?.Name.title[0].text.content"
+        :alt="blog.headers?.Name.title[0].text?.content"
         class="h-[300px] object-cover mx-auto mt-4 rounded-lg"
       />
 
@@ -78,15 +77,15 @@ fetchBlog();
         >
           <h1
             class="text-xl font-bold mt-4"
-            :id="block[block.type]?.rich_text[0].text.content"
+            :id="block[block.type]?.rich_text[0]?.text?.content"
           >
-            {{ block[block.type]?.rich_text[0].text.content }}
+            {{ block[block.type]?.rich_text[0]?.text?.content }}
           </h1>
         </template>
 
         <template v-else-if="block.type === BlockType.PARAGRAPH">
           <p class="mt-2">
-            {{ block.paragraph?.rich_text[0].text.content }}
+            {{ block.paragraph?.rich_text[0]?.text?.content }}
           </p>
         </template>
 
@@ -96,10 +95,25 @@ fetchBlog();
 
             <p class="mt-2">
               <span>
-                {{ block.numbered_list_item?.rich_text[0].text.content }}
+                {{ block.numbered_list_item?.rich_text[0]?.text?.content }}
               </span>
             </p>
           </div>
+        </template>
+
+        <template v-else-if="block.type === BlockType.IMAGE">
+          <NuxtImg
+            :src="block.image?.file.url"
+            :alt="blog.headers?.Name.title[0].text.content + ' image'"
+            class="max-h-[300px] object-cover mx-auto mt-4 rounded-lg"
+          />
+        </template>
+
+        <template v-else-if="block.type === BlockType.CODE">
+          <Code
+            :language="block.code?.language"
+            :code="block.code?.rich_text[0]?.text?.content"
+          />
         </template>
       </p>
     </div>

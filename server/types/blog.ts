@@ -4,6 +4,8 @@ export enum BlockType {
   HEADING_2 = "heading_2",
   HEADING_3 = "heading_3",
   NUMBERED_LIST_ITEM = "numbered_list_item",
+  IMAGE = "image",
+  CODE = "code",
 }
 
 export interface Blog {
@@ -55,7 +57,7 @@ export interface Blog {
 
 interface RichTextBlock {
   rich_text: {
-    text: {
+    text?: {
       content: string;
     };
     annotations: {
@@ -67,6 +69,7 @@ interface RichTextBlock {
       color: string;
     };
   }[];
+  language?: string;
 }
 
 export interface SingleBlog {
@@ -77,6 +80,12 @@ export interface SingleBlog {
     heading_3?: RichTextBlock;
     paragraph?: RichTextBlock;
     numbered_list_item?: RichTextBlock;
+    image?: {
+      file: {
+        url: string;
+      };
+    };
+    code?: RichTextBlock;
     number?: number;
   }[];
   headers?: {

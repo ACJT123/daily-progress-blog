@@ -20,9 +20,7 @@ export default defineEventHandler(async (event: any) => {
     const { id } = event.context.params;
     const blog = await getBlogContentBlock(id);
 
-    const headers = (await getBlogHeaders(id)) as { properties: {} };
-
-    console.log("headers", headers);
+    const headers = (await getBlogHeaders(id)) as any;
 
     // add number label for numbered list
     blog.results
