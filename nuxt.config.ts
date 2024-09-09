@@ -1,4 +1,5 @@
 import Aura from "@primevue/themes/aura";
+import { inject } from "@vercel/analytics";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -31,4 +32,11 @@ export default defineNuxtConfig({
   },
 
   compatibilityDate: "2024-09-05",
+
+  // inject
+  hooks: {
+    ready: () => {
+      inject(); // Vercel analytics will be injected when the app is ready
+    },
+  },
 });
