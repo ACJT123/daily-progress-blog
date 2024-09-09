@@ -1,4 +1,5 @@
 <script setup>
+import hljs from "highlight.js";
 import CodeEditor from "simple-code-editor";
 
 const props = defineProps({
