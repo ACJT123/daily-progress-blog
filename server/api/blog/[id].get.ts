@@ -22,12 +22,23 @@ export default defineEventHandler(async (event: any) => {
 
     const headers = (await getBlogHeaders(id)) as any;
 
-    // add number label for numbered list
-    blog.results
-      .filter((block: any) => block.type === BlockType.NUMBERED_LIST_ITEM)
-      .forEach((block: any, index: number) => {
-        block.number = index + 1;
-      });
+    // add number label for numbered list block
+    let counter = 1;
+
+    for (let i = 0; i < blog.results.length; i++) {
+      const current = blog.results[i] as any;
+      const next = blog.results[i + 1] as any;
+
+      if (current.type === BlockType.NUMBERED_LIST_ITEM) {
+        current.number = counter;
+
+        if (next && next.type === BlockType.NUMBERED_LIST_ITEM) {
+          counter++;
+        } else {
+          counter = 1;
+        }
+      }
+    }
 
     return {
       block: blog.results,
