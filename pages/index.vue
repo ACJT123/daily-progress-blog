@@ -2,6 +2,8 @@
 import { ref } from "vue";
 import type { Blog } from "~/server/types/blog";
 import { DateTime } from "luxon";
+import Skeleton from "~/components/skeleton.vue";
+import { SkeletonType } from "~/server/types/skeleton";
 
 const blogs = ref<Blog[]>([]);
 const loading = ref(true);
@@ -13,10 +15,10 @@ const fetchBlogs = async () => {
     blogs.value = Array.isArray(data.value)
       ? (data.value as Blog[]).filter((_: any, index: number) => index < 4)
       : [];
-
-    loading.value = false;
   } catch (error) {
     console.error(error);
+  } finally {
+    loading.value = false;
   }
 };
 
@@ -50,10 +52,10 @@ fetchBlogs();
     <h1 class="text-2xl font-bold">Recent Blogs</h1>
 
     <!-- Loading Spinner -->
-    <div v-if="loading" class="flex justify-center items-center">
-      <div class="loader"></div>
-      <p>Loading...</p>
-    </div>
+
+    <template v-if="loading">
+      <Skeleton :skType="SkeletonType.BLOGS" />
+    </template>
 
     <!-- Blog Content -->
     <div

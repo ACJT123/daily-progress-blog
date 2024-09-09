@@ -9,6 +9,8 @@ import {
 
 import { DateTime } from "luxon";
 import Content from "~/components/blog/content.vue";
+import Skeleton from "~/components/skeleton.vue";
+import { SkeletonType } from "~/server/types/skeleton";
 
 const blog = ref<SingleBlog>({
   createdDate: DateTime.now().toISO(),
@@ -28,6 +30,8 @@ const fetchBlog = async () => {
     blog.value.createdDate = data.value.createdDate;
   } catch (error) {
     console.error(error);
+  } finally {
+    loading.value = false;
   }
 };
 
@@ -35,7 +39,13 @@ fetchBlog();
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap-10 pb-4 pt-6 relative">
+  <template v-if="loading">
+    <div class="pt-6">
+      <Skeleton :skType="SkeletonType.BLOG" />
+    </div>
+  </template>
+
+  <div v-else class="flex flex-col md:flex-row gap-10 pb-4 pt-6 relative">
     <aside
       class="bg-green-400/20 rounded-md px-4 py-2 pb-4 w-[200px] h-fit sticky top-4 hidden md:block"
     >

@@ -1,3 +1,5 @@
+import Aura from "@primevue/themes/aura";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -10,12 +12,20 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/image"],
+  modules: ["@nuxt/image", "@primevue/nuxt-module"],
 
   nitro: {
     esbuild: {
       options: {
         target: "esnext", // supports top level await
+      },
+    },
+  },
+
+  primevue: {
+    options: {
+      theme: {
+        preset: Aura,
       },
     },
   },
