@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const showNavbar = ref(true);
 
@@ -34,7 +34,7 @@ onBeforeUnmount(() => {
       ]"
     >
       <ul
-        class="flex gap-4 py-8 px-[20px] md:px-[50px] lg:px-[80px] xl:px-[200px] items-baseline shadow-md shadow-green-400/25 bg-black"
+        class="flex gap-4 py-8 px-[20px] md:px-[50px] lg:px-[80px] xl:px-[200px] items-baseline shadow-md shadow-green-400/25 bg-[#121212]"
       >
         <li class="flex-grow hidden md:block">
           <NuxtLink to="/">ACJT Daily Progress Blog</NuxtLink>
