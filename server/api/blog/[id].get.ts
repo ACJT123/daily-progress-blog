@@ -22,6 +22,8 @@ export default defineEventHandler(async (event: any) => {
 
     const headers = (await getBlogHeaders(id)) as any;
 
+    console.log(blog.results)
+
     // add number label for numbered list block
     let counter = 1;
 

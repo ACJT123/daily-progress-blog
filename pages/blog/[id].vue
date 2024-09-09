@@ -141,6 +141,18 @@ fetchBlog();
           </div>
         </template>
 
+        <template v-else-if="block.type === BlockType.BULLETED_LIST_ITEM">
+          <div class="flex items-baseline gap-2">
+            <p class="mt-2">
+              <template v-for="list in block.bulleted_list_item?.rich_text">
+                <span class="">
+                  {{ list.text?.content }}
+                </span>
+              </template>
+            </p>
+          </div>
+        </template>
+
         <template v-else-if="block.type === BlockType.IMAGE">
           <NuxtImg
             :src="block.image?.file.url"
