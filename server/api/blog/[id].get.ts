@@ -22,7 +22,7 @@ export default defineEventHandler(async (event: any) => {
 
     const headers = (await getBlogHeaders(id)) as any;
 
-    // add number label for numbered list
+    // add number label for numbered list block
     let counter = 1;
 
     for (let i = 0; i < blog.results.length; i++) {
