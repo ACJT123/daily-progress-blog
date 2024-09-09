@@ -6,8 +6,9 @@ import {
   type SingleBlog,
   type SingleBlogResponse,
 } from "~/server/types/blog";
-import Code from "~/components/code.vue";
+
 import { DateTime } from "luxon";
+import Content from "~/components/blog/content.vue";
 
 const blog = ref<SingleBlog>({
   createdDate: DateTime.now().toISO(),
@@ -108,53 +109,7 @@ fetchBlog();
       <section v-for="block in blog.block">
         <br />
 
-        <template
-          v-if="
-            block.type === BlockType.HEADING_1 ||
-            block.type === BlockType.HEADING_2 ||
-            block.type === BlockType.HEADING_3
-          "
-        >
-          <h1
-            class="text-xl font-bold mt-4"
-            :id="block[block.type]?.rich_text[0]?.text?.content"
-          >
-            {{ block[block.type]?.rich_text[0]?.text?.content }}
-          </h1>
-        </template>
-
-        <template v-else-if="block.type === BlockType.PARAGRAPH">
-          <p class="mt-2">
-            {{ block.paragraph?.rich_text[0]?.text?.content }}
-          </p>
-        </template>
-
-        <template v-else-if="block.type === BlockType.NUMBERED_LIST_ITEM">
-          <div class="flex items-baseline gap-2">
-            <span> {{ block.number }}. </span>
-
-            <p class="mt-2">
-              <span>
-                {{ block.numbered_list_item?.rich_text[0]?.text?.content }}
-              </span>
-            </p>
-          </div>
-        </template>
-
-        <template v-else-if="block.type === BlockType.IMAGE">
-          <NuxtImg
-            :src="block.image?.file.url"
-            :alt="blog.headers?.Name.title[0].text.content + ' image'"
-            class="max-h-[300px] object-cover mx-auto mt-4 rounded-lg"
-          />
-        </template>
-
-        <template v-else-if="block.type === BlockType.CODE">
-          <Code
-            :language="block.code?.language"
-            :code="block.code?.rich_text[0]?.text?.content"
-          />
-        </template>
+        <Content :block="block" />
       </section>
     </div>
   </div>

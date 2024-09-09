@@ -15,6 +15,7 @@ const props = defineProps({
       v-model="props.code"
       :languages="[[props.language]]"
       :read-only="true"
+      font-size="14px"
     >
     </CodeEditor>
   </LazyClientOnly>
