@@ -25,11 +25,12 @@ export default defineEventHandler(async (event: any) => {
     console.log(blog.results);
 
     let counter = 1;
-    
+
     for (let i = 0; i < blog.results.length; i++) {
       const current = blog.results[i] as any;
-      const next = blog.results[i + 1] as any;
-      
+      const next =
+        i + 1 < blog.results.length ? blog.results[i + 1] : (null as any);
+
       switch (current.type) {
         // add number label for numbered list block
         case BlockType.NUMBERED_LIST_ITEM: {
