@@ -15,7 +15,7 @@ onMounted(() => {
     const id = e.getAttribute("id");
 
     if (id) {
-      sections[id] = e.getBoundingClientRect().top + window.scrollY - 50; // re-adjusting the position
+      sections[id] = e.getBoundingClientRect().top + window.scrollY - 70; // re-adjusting the position
     }
   });
 
