@@ -97,4 +97,13 @@ const renderAnnotation = (annotations: any) => {
       :code="block.code?.rich_text[0]?.text?.content"
     />
   </template>
+
+  <template v-else-if="block.type === BlockType.VIDEO">
+    {{ block.video?.external.url }}
+    <iframe
+      class="mx-auto mt-4 4xs:size-full sm:w-[560px] sm:h-[315px]"
+      :src="block.video?.external.url"
+    >
+    </iframe>
+  </template>
 </template>
