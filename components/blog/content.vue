@@ -43,7 +43,7 @@ const renderAnnotation = (annotations: any) => {
     "
   >
     <h1
-      class="text-xl font-bold mt-4"
+      class="text-xl font-bold pt-4"
       :id="block[block.type]?.rich_text[0]?.text?.content"
     >
       {{ block[block.type]?.rich_text[0]?.text?.content }}
@@ -96,5 +96,14 @@ const renderAnnotation = (annotations: any) => {
       :language="block.code?.language"
       :code="block.code?.rich_text[0]?.text?.content"
     />
+  </template>
+
+  <template v-else-if="block.type === BlockType.VIDEO">
+    {{ block.video?.external.url }}
+    <iframe
+      class="mx-auto mt-4 4xs:size-full sm:w-[560px] sm:h-[315px]"
+      :src="block.video?.external.url"
+    >
+    </iframe>
   </template>
 </template>

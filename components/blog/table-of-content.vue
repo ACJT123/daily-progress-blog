@@ -1,9 +1,42 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { BlockType } from "~/server/types/blog";
 
 const { blog } = defineProps<{
   blog: any;
 }>();
+
+const sections = <Record<string, number>>{};
+
+onMounted(() => {
+  const sectionElements = document.querySelectorAll("h1");
+
+  sectionElements.forEach((e: Element) => {
+    const id = e.getAttribute("id");
+
+    if (id) {
+      sections[id] = e.getBoundingClientRect().top + window.scrollY - 50; // re-adjusting the position
+    }
+  });
+
+  window.addEventListener("scroll", onScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", onScroll); // for cleanup
+});
+
+const onScroll = () => {
+  const scrollPosition =
+    document.documentElement.scrollTop || document.body.scrollTop;
+
+  for (const id in sections) {
+    if (sections[id] <= scrollPosition) {
+      document.querySelector(".active")?.classList.remove("active");
+      document.querySelector(`a[href*="${id}"]`)?.classList.add("active");
+    }
+  }
+};
 </script>
 
 <template>
@@ -31,4 +64,8 @@ const { blog } = defineProps<{
   </aside>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.active {
+  @apply font-bold opacity-100;
+}
+</style>

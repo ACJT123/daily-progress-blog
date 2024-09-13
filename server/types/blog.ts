@@ -7,6 +7,7 @@ export enum BlockType {
   BULLETED_LIST_ITEM = "bulleted_list_item",
   IMAGE = "image",
   CODE = "code",
+  VIDEO = "video",
 }
 
 export interface Blog {
@@ -84,6 +85,13 @@ export interface SingleBlog {
     bulleted_list_item?: RichTextBlock;
     image?: {
       file: {
+        url: string;
+      };
+    };
+    video?: {
+      caption: [];
+      type: string;
+      external: {
         url: string;
       };
     };

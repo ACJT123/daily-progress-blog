@@ -22,22 +22,33 @@ export default defineEventHandler(async (event: any) => {
 
     const headers = (await getBlogHeaders(id)) as any;
 
-    console.log(blog.results)
+    console.log(blog.results);
 
-    // add number label for numbered list block
     let counter = 1;
 
     for (let i = 0; i < blog.results.length; i++) {
       const current = blog.results[i] as any;
-      const next = blog.results[i + 1] as any;
+      const next =
+        i + 1 < blog.results.length ? blog.results[i + 1] : (null as any);
 
-      if (current.type === BlockType.NUMBERED_LIST_ITEM) {
-        current.number = counter;
+      switch (current.type) {
+        // add number label for numbered list block
+        case BlockType.NUMBERED_LIST_ITEM: {
+          current.number = counter;
+          if (next && next.type === BlockType.NUMBERED_LIST_ITEM) {
+            counter++;
+          } else {
+            counter = 1;
+          }
+          break;
+        }
 
-        if (next && next.type === BlockType.NUMBERED_LIST_ITEM) {
-          counter++;
-        } else {
-          counter = 1;
+        // add embed link for video block
+        case BlockType.VIDEO: {
+          const url = current.video.external.url;
+          const embedUrl = url.replace("watch", "embed/watch");
+          current.video.external.url = embedUrl;
+          break;
         }
       }
     }

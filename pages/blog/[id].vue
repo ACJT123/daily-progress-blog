@@ -101,4 +101,8 @@ fetchBlog();
   </div>
 </template>
 
-<style lang="scss" scoped></style>
+<style>
+html {
+  scroll-behavior: smooth;
+}
+</style>
