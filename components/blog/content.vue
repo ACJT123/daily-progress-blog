@@ -6,6 +6,32 @@ import { BlockType } from "~/server/types/blog";
 const { block } = defineProps({
   block: Object as () => any,
 });
+
+const renderAnnotation = (annotations: any) => {
+  const classes = [];
+
+  switch (annotations) {
+    case "bold":
+      classes.push("font-bold");
+      break;
+    case "italic":
+      classes.push("italic");
+      break;
+    case "strikethrough":
+      classes.push("line-through");
+      break;
+    case "underline":
+      classes.push("underline");
+      break;
+    case "code":
+      classes.push("bg-gray-200 p-1 rounded-md");
+      break;
+    default:
+      break;
+  }
+
+  return classes.join(" ");
+};
 </script>
 
 <template>
@@ -26,7 +52,11 @@ const { block } = defineProps({
 
   <template v-else-if="block.type === BlockType.PARAGRAPH">
     <p class="mt-2">
-      {{ block.paragraph?.rich_text[0]?.text?.content }}
+      <template v-for="richText in block.paragraph?.rich_text">
+        <span :class="renderAnnotation(richText?.annotations)">{{
+          richText?.text?.content
+        }}</span>
+      </template>
     </p>
   </template>
 
