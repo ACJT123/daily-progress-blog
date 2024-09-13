@@ -43,7 +43,7 @@ const renderAnnotation = (annotations: any) => {
     "
   >
     <h1
-      class="text-xl font-bold mt-4"
+      class="text-xl font-bold pt-4"
       :id="block[block.type]?.rich_text[0]?.text?.content"
     >
       {{ block[block.type]?.rich_text[0]?.text?.content }}
