@@ -103,6 +103,7 @@ const renderAnnotation = (annotations: any) => {
     <iframe
       class="mx-auto mt-4 4xs:size-full sm:w-[560px] sm:h-[315px]"
       :src="block.video?.external.url"
+      :allowfullscreen="true"
     >
     </iframe>
   </template>
