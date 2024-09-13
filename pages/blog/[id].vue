@@ -93,8 +93,6 @@ fetchBlog();
       </section>
 
       <section v-for="block in blog.block">
-        <br />
-
         <Content :block="block" />
       </section>
     </div>
